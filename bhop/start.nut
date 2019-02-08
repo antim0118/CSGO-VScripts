@@ -1,4 +1,4 @@
-//v.1.0
+//v.1.1
 //created by antim.
 
 ::GetDistance<-function(vec1, vec2)
@@ -117,6 +117,13 @@ function DotBetweenVectors(dot, vec1, vec2){
 	return ret;
 }
 
+::VectorIsEmpty<-function(vec){
+	return (vec.x == 0 && vec.y == 0 && vec.z == 0);
+}
+::VectorToString<-function(vec){
+	return "Vector("+vec.x+","+vec.y+","+vec.z+")";
+}
+
 function IntToTime(int){
 	local m = int.tointeger() / 60;
 	local s = int.tointeger() % 60;
@@ -147,6 +154,9 @@ enum BStats
 ::BHOP_TempPos <- Vector(0,0,0);
 ::BHOPEventTimer<-function(){
 	local player = GetPlayer(1);
+	
+	if(BHOP_map == null)
+		return;
 	
 	//update state
 	local instart = DotBetweenVectors(Vector(player.GetOrigin().x,player.GetOrigin().y,player.GetOrigin().z+60), BHOP_map[0], BHOP_map[1]);
@@ -192,4 +202,5 @@ enum BStats
 
 ::StartBHOP<-function(){
 	SetupTimer("timer_event_bhop", "BHOPEventTimer", 0.02);
+	SetupTimer("timer_chatspammer", "SetupCommands", 180.0);
 }
