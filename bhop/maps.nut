@@ -14,9 +14,7 @@ function StringContains(str, part){
 
 ::BHOP_map<-null;
 function SetMap(){
-	local mapname = GetMapName();
-	if(StringContains(mapname, "workshop/"))
-		mapname = split(mapname, "/")[2];
+	local mapname = MapName();
 		
 	try{
 		BHOP_map = BHOP_maps[mapname];

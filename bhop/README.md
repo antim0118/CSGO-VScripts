@@ -4,6 +4,7 @@ Bhop Mode with timer and checkpoints.
 ### Features:
 * Glowing boxes at start and end of map;
 * HUD with speed, current time and best time
+* Leaderboards with ranks (but without names)
 
 ### How to use:
 1. Open one of supported maps

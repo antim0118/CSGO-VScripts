@@ -23,9 +23,7 @@
 			BHOP_map = [Vector(0,0,0),Vector(0,0,0),Vector(0,0,0),Vector(0,0,0)];
 		BHOP_map[point] = origin;
 		if(!VectorIsEmpty(BHOP_map[0]) && !VectorIsEmpty(BHOP_map[1]) && !VectorIsEmpty(BHOP_map[2]) && !VectorIsEmpty(BHOP_map[3])){
-			local mapname = GetMapName();
-			if(StringContains(mapname, "workshop/"))
-				mapname = split(mapname, "/")[2];
+			local mapname = MapName();
 			local saveline = "BHOP_maps[\""+mapname+"\"]<-["+VectorToString(BHOP_map[0])+", "+VectorToString(BHOP_map[1])+", "+VectorToString(BHOP_map[2])+", "+VectorToString(BHOP_map[3])+"];";
 			
 			ScriptPrintMessageChatAll("");
@@ -60,6 +58,18 @@
 		ScriptPrintMessageChatAll(" \x2 You should stay on start to tp to end!!!");
 	
 }
+::bhop_list<-function(){
+	printl("");
+	printl("BHOP Times list:");
+	printl("___________________");
+	if(BHOP_Times == null || BHOP_Times.len() == 0)
+		printl("its clear.");
+	else{
+		foreach(idx,val in BHOP_Times){
+			printl("#"+(idx+1)+" - "+IntToTimeWithMS(val));
+		}
+	}
+}
 
 function SetupCommands(){
 	SendToConsole("alias bhop_setup \"script bhop_setup(null)\"");
@@ -70,8 +80,10 @@ function SetupCommands(){
 	ScriptPrintMessageChatAll("Commands for console:");
 	ScriptPrintMessageChatAll("bhop_start - tp to start");
 	ScriptPrintMessageChatAll("bhop_end - tp to end");
+	ScriptPrintMessageChatAll("bhop_list - time list");
 	ScriptPrintMessageChatAll("bhop_setup - set checkpoints");
 	
 	SendToConsole("alias bhop_start \"script bhop_start()\"");
 	SendToConsole("alias bhop_end \"script bhop_end()\"");
+	SendToConsole("alias bhop_list \"script bhop_list()\"");
 }
